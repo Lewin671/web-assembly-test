@@ -16,7 +16,15 @@
             .then((bytes) => WebAssembly.compile(bytes))
             .then((module) => WebAssembly.instantiate(module, {}))
             .then((instance) => instance.exports)
-            .then((instance) => measureTime(() => console.log(instance.calc())))
-            .then((timeCost) => console.log("cost " + timeCost + "ms"));
+            .then((instance) =>
+                measureTime(() =>
+                    document.write(
+                        "<br/>calculated result by JS is " + instance.calc()
+                    )
+                )
+            )
+            .then((timeCost) =>
+                document.write("<br/> time cost by JS is " + timeCost + "ms")
+            );
     </script>
 </html>
