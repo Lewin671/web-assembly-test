@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>base</title>
+</head>
+<body>
+
+</body>
+<script>
+    function measureTime(f, args = []) {
+        const startTime = new Date().getTime(); // 结束时间
+        f(...args);
+        return new Date().getTime() - startTime;
+    }
+
+    function test() {
+        let result = 1;
+        for (let i = 1; i <= 1000000; i++) {
+            result += i;
+        }
+        document.write("<br/>calculated result by JS is " + result);
+    }
+
+    const timeCost = measureTime(test);
+    document.write("<br/> time cost by JS is " + timeCost + "ms");
+</script>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>web-assembly</title>
+    </head>
+    <body></body>
+    <script>
+        function measureTime(f, args = []) {
+            const startTime = new Date().getTime(); // 结束时间
+            f(...args);
+            return new Date().getTime() - startTime;
+        }
+        fetch("a.out.wasm")
+            .then((res) => res.arrayBuffer())
+            .then((bytes) => WebAssembly.compile(bytes))
+            .then((module) => WebAssembly.instantiate(module, {}))
+            .then((instance) => instance.exports)
+            .then((instance) => measureTime(() => console.log(instance.calc())))
+            .then((timeCost) => console.log("cost " + timeCost + "ms"));
+    </script>
+</html>
